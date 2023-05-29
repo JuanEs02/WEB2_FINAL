@@ -1,7 +1,9 @@
 import React from 'react'
+import './assets/register/register.css'
 import { Link } from 'react-router-dom';
 
 const register = () => {
+
   return (
     <html lang="en">
       <head>
@@ -13,13 +15,12 @@ const register = () => {
         <link rel="stylesheet" href="styles.css" />
       </head>
       <body>
-
         <div class="login">
           <div class="avatar">
             <img src="icon1.png" alt="" />
           </div>
           <h2>Sagral</h2>
-          <h3>Nos encanta recibir nuevos miembros </h3>
+          <h3>Bienvenidos a nuestra comunidad educativa</h3>
           <form class="login-form">
             <div class="textbox">
               <input type="email" placeholder="Usuario" />
@@ -37,8 +38,11 @@ const register = () => {
               <input type="password" placeholder="Confirmar Contraseña" />
               <span class="material-symbols-outlined"> key </span>
             </div>
-            <button type="submit">Iniciar sesión</button>
-            <Link to="/register">Regístrate si no tienes cuenta</Link>
+            <Link to="/login" type="button" className="btn btn-primary">
+              <div className="boton">
+                Registrarse
+              </div>
+            </Link>
           </form>
         </div>
       </body>

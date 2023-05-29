@@ -29,7 +29,10 @@ const login = () => {
                             <input type="password" placeholder="Contraseña" />
                             <span class="material-symbols-outlined"> lock </span>
                         </div>
-                        <button type="submit">Iniciar sesión</button>
+
+                        <Link to="/menu" type="button" className="btn btn-primary">
+                            <div className="boton">Iniciar sesión</div>
+                        </Link>
                         <Link to="/register">Regístrate si no tienes cuenta</Link>
                     </form>
                 </div>
