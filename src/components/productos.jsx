@@ -131,7 +131,7 @@ const cancelar = () => {
           <Link to="/clientes" style={{ animationDelay: "0.3s" }}><strong>Clientes</strong></Link>
           <Link to="/tareas" style={{ animationDelay: "0.4s" }}><strong>Tareas</strong></Link>
           <Link to="/publicaciones" style={{ animationDelay: "0.5s" }}><strong>Publicaciones</strong></Link>
-          <Link to="/reservas" style={{ animationDelay: "0.7s" }}><strong>Reservas</strong></Link>
+          <Link to="/empleados" style={{ animationDelay: "0.7s" }}><strong>Empleados</strong></Link>
         </nav>
       </div>
 
