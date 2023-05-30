@@ -15,9 +15,9 @@ const menu = () => {
           <h2>Menu de CRUDS</h2>
           <Link to="/productos" style={{animationDelay: "0.2s"}}><strong>Productos</strong></Link>
           <Link to="/clientes" style={{animationDelay: "0.3s"}}><strong>Clientes</strong></Link>
-          <Link to="/Tareas" style={{animationDelay: "0.4s"}}><strong>Tareas</strong></Link>
-          <Link to="/Publicaciones" style={{animationDelay: "0.5s"}}><strong>Publicaciones</strong></Link>
-          <Link to="/Reservas" style={{animationDelay: "0.7s"}}><strong>Reservas</strong></Link>
+          <Link to="/tareas" style={{animationDelay: "0.4s"}}><strong>Tareas</strong></Link>
+          <Link to="/publicaciones" style={{animationDelay: "0.5s"}}><strong>Publicaciones</strong></Link>
+          <Link to="/reservas" style={{animationDelay: "0.7s"}}><strong>Reservas</strong></Link>
         </nav>
       </div>
       <h2>JUAN ESMERAL</h2>
