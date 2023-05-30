@@ -2,7 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Menu from './components/menu';
-import Menu1 from './components/menu1';
+import Productos from './components/productos';
+import Clientes from './components/clientes';
+import Tareas from './components/tareas';
+import Publicaciones from './components/publicaciones';
+import Reservas from './components/reservas';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -11,7 +15,11 @@ root.render(
     <Router>
       <Routes>
         <Route path="/" element={<Menu />} />
-        <Route path="/Menu1" element={<Menu1 />} /> 
+        <Route path="/productos" element={<Productos />} /> 
+        <Route path="/clientes" element={<Clientes />} /> 
+        <Route path="/tareas" element={<Tareas />} /> 
+        <Route path="/Publicaciones" element={<Publicaciones />} /> 
+        <Route path="/Reservas" element={<Reservas />} /> 
       </Routes>
     </Router>
   </React.StrictMode>
