@@ -65,12 +65,12 @@ const Empleados = () => {
       return false;
     }
 
-    if (departamento.trim() === ''){
+    if (departamento.trim() === '') {
       setError('Seleccione un departamento');
       return false;
     }
 
-    if (cargo.trim() === ''){
+    if (cargo.trim() === '') {
       setError('Seleccione un cargo segun su departamento');
       return false;
     }
@@ -80,12 +80,12 @@ const Empleados = () => {
       return false;
     }
 
-    if(correo.trim() === ''){
+    if (correo.trim() === '') {
       setError('Agregue un correo');
       return false;
     }
 
-    if(telefono.trim() === ''){
+    if (telefono.trim() === '') {
       setError('Agregue un telefono');
       return false;
     }
@@ -140,14 +140,14 @@ const Empleados = () => {
       const nuevoArray = listaEmpleados.map((item) =>
         item.id === id
           ? {
-              id: id,
-              nombre: nombre,
-              cargo: cargo,
-              departamento: departamento,
-              fechacontra: fechacontra,
-              correo: correo,
-              telefono: telefono,
-            }
+            id: id,
+            nombre: nombre,
+            cargo: cargo,
+            departamento: departamento,
+            fechacontra: fechacontra,
+            correo: correo,
+            telefono: telefono,
+          }
           : item
       );
 
@@ -292,56 +292,74 @@ const Empleados = () => {
               {modoEdicion ? 'Editar Empleado' : 'Añadir Empleado'}
             </h4>
             <form onSubmit={modoEdicion ? editarEmpleados : guardarEmpleados}>
-              <input
-                type="text"
-                className="form-control mb-2"
-                placeholder="Ingrese un nombre"
-                value={nombre}
-                onChange={(e) => setNombre(e.target.value)}
-              />
-              <select
-                className="form-control mb-2"
-                value={departamento}
-                onChange={handleDepartamentoChange}
-              >
-                <option value="" disabled>Seleccionar departamento</option>
-                <option value="Recursos Humanos">Recursos Humanos</option>
-                <option value="Finanzas">Finanzas</option>
-                <option value="Ventas">Ventas</option>
-              </select>
-              {departamento && (
+              <div class="input-group mb-3">
+                <span class="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> badge </span>
+                <input
+                  type="text"
+                  className="form-control mb-2"
+                  placeholder="Ingrese un nombre"
+                  value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> engineering </span>
                 <select
                   className="form-control mb-2"
-                  value={cargo}
-                  onChange={(e) => setCargo(e.target.value)}
+                  value={departamento}
+                  onChange={handleDepartamentoChange}
                 >
-                  <option value="" disabled>Seleccionar cargo</option>
-                  {cargosPorDepartamento[departamento].map((cargo) => (
-                    <option key={cargo}>{cargo}</option>
-                  ))}
+                  <option value="" disabled>Seleccionar departamento</option>
+                  <option value="Recursos Humanos">Recursos Humanos</option>
+                  <option value="Finanzas">Finanzas</option>
+                  <option value="Ventas">Ventas</option>
                 </select>
+              </div>
+              {departamento && (
+                <div class="input-group mb-3">
+                  <span class="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> workspace_premium </span>
+                  <select
+                    className="form-control mb-2"
+                    value={cargo}
+                    onChange={(e) => setCargo(e.target.value)}
+                  >
+                    <option value="" disabled>Seleccionar cargo</option>
+                    {cargosPorDepartamento[departamento].map((cargo) => (
+                      <option key={cargo}>{cargo}</option>
+                    ))}
+                  </select>
+                </div>
               )}
-              <input
-                type="date"
-                className="form-control mb-2"
-                placeholder="Ingrese la fecha de contratación"
-                value={fechacontra}
-                onChange={(e) => setFechaContra(e.target.value)}
-              />
-              <input
-                type="text"
-                className="form-control mb-2"
-                placeholder="Ingrese un correo"
-                value={correo}
-                onChange={(e) => setCorreo(e.target.value)}
-              />
-              <input
-                type="text"
-                className="form-control mb-2"
-                placeholder="Ingrese un telefono"
-                value={telefono}
-                onChange={(e) => setTelefono(e.target.value)}
-              />
+              <div class="input-group mb-3">
+                <span class="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> calendar_month </span>
+                <input
+                  type="date"
+                  className="form-control mb-2"
+                  placeholder="Ingrese la fecha de contratación"
+                  value={fechacontra}
+                  onChange={(e) => setFechaContra(e.target.value)}
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span className="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> mail </span>
+                <input
+                  type="text"
+                  className="form-control mb-2"
+                  placeholder="Ingrese un correo"
+                  value={correo}
+                  onChange={(e) => setCorreo(e.target.value)}
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span className="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> phone </span>
+                <input
+                  type="text"
+                  className="form-control mb-2"
+                  placeholder="Ingrese un telefono"
+                  value={telefono}
+                  onChange={(e) => setTelefono(e.target.value)}
+                />
+              </div>
               <div className="d-grid gap-2">
                 {modoEdicion ? (
                   <>
