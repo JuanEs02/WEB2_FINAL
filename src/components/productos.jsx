@@ -135,21 +135,25 @@ const Productos = () => {
   const validarCampos = () => {
     setError(null);
 
-    if (nombre.trim() === '' || descripcion.trim() === '') {
-      setError('Los campos de nombre y/o descripción no pueden estar vacíos.');
+    if (nombre.trim() === '') {
+      setError('Agregue el nombre del producto');
       return false;
     }
 
-    if (precio < 5000 || precio > 1000000 || isNaN(precio)) {
-      setError('El precio debe estar entre $5.000 y $1.000.000');
+    if (descripcion.trim() === '') {
+      setError('Agregue una descripción al producto');
       return false;
     }
 
-    if (cantidad_disponible <= 0 || cantidad_disponible > 100 || isNaN(cantidad_disponible)) {
-      setError('La cantidad disponible debe ser mayor a 0 y no puede superar 100.');
+    if (precio < 5000 || precio > 1000000) {
+      setError('El precio debe estar entre $5.000 y $100.000');
       return false;
     }
 
+    if (cantidad_disponible <= 0 || cantidad_disponible > 100) {
+      setError('La cantidad disponible debe ser mayor a 0 y no puede superar de 100.');
+      return false;
+    }
     return true;
   };
 
@@ -230,7 +234,7 @@ const Productos = () => {
                 />
               </div>
               <div class="input-group mb-3">
-              <span class="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> article </span>
+                <span class="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> article </span>
                 <input
                   type="text"
                   className="form-control mb-2"
@@ -240,7 +244,7 @@ const Productos = () => {
                 />
               </div>
               <div class="input-group mb-3">
-              <span class="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> attach_money </span>
+                <span class="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> attach_money </span>
                 <input
                   type="text"
                   className="form-control mb-2"
@@ -250,7 +254,7 @@ const Productos = () => {
                 />
               </div>
               <div class="input-group mb-3">
-              <span class="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> inventory_2 </span>
+                <span class="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> inventory_2 </span>
                 <input
                   type="text"
                   className="form-control mb-2"
@@ -291,15 +295,6 @@ const Productos = () => {
             <div className="modal-content bg-dark">
               <div className="modal-header">
                 <h5 className="modal-title">Error al ingresar datos</h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                  onClick={() => setError(null)}
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
               </div>
               <div className="modal-body">
                 <p>{error}</p>
@@ -307,7 +302,7 @@ const Productos = () => {
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-primary"
+                  className="btn btn-light"
                   data-dismiss="modal"
                   onClick={() => setError(null)}
                 >

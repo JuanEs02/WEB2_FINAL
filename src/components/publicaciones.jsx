@@ -35,18 +35,23 @@ const Publicaciones = () => {
   const validarCampos = () => {
     setError(null);
 
-    if (titulo.trim() === '' || contenido.trim() === '') {
-      setError('Los campos de título y/o contenido no pueden estar vacíos.');
+    if (titulo.trim() === '') {
+      setError('Agregue un titulo');
       return false;
     }
 
-    if (fechacrea.trim() === '' || !/^\d{4}-\d{2}-\d{2}$/.test(fechacrea)) {
-      setError('La fecha no debe estar vacia y debe tener el formato YYYY-MM-DD.');
+    if (contenido.trim() === ''){
+      setError("Agregue un contenido para su publicación")
       return false;
     }
+    
+    if (fechacrea.trim() === '') {
+        setError('Agregue una fecha de creación');
+        return false;
+      }
 
     if (autor.trim() === '') {
-      setError('El campo de auto no puede ser vacio')
+      setError('Agregue el autor')
       return false;
     }
     return true;
@@ -200,7 +205,7 @@ const Publicaciones = () => {
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> calendar_month </span>
-                <input type="text" className="form-control mb-2" placeholder="Ingrese fecha creación (YYYY-MM-DD)" value={fechacrea} onChange={(e) => setFechaCrea(e.target.value)} />
+                <input type="date" className="form-control mb-2" value={fechacrea} onChange={(e) => setFechaCrea(e.target.value)} />
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> person </span>
@@ -232,15 +237,6 @@ const Publicaciones = () => {
             <div className="modal-content bg-dark">
               <div className="modal-header">
                 <h5 className="modal-title">Error al ingresar datos</h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                  onClick={() => setError(null)}
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
               </div>
               <div className="modal-body">
                 <p>{error}</p>
@@ -248,7 +244,7 @@ const Publicaciones = () => {
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-primary"
+                  className="btn btn-light"
                   data-dismiss="modal"
                   onClick={() => setError(null)}
                 >

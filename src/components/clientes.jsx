@@ -135,8 +135,18 @@ const Clientes = () => {
   const validarCampos = () => {
     setError(null);
 
-    if (nombre.trim() === '' || correo.trim() === '' || telefono.trim() === '') {
-      setError('Los campos de nombre, correo y teléfono no pueden estar vacíos.');
+    if (nombre.trim() === '') {
+      setError('Agregue un nombre');
+      return false;
+    }
+
+    if(correo.trim() === ''){
+      setError('Agregue un correo');
+      return false;
+    }
+
+    if(telefono.trim() === ''){
+      setError('Agregue un telefono');
       return false;
     }
 
@@ -149,7 +159,6 @@ const Clientes = () => {
       setError('Ingrese un número de teléfono válido.');
       return false;
     }
-
     return true;
   };
 
@@ -300,15 +309,6 @@ const Clientes = () => {
             <div className="modal-content bg-dark">
               <div className="modal-header">
                 <h5 className="modal-title">Error al ingresar datos</h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                  onClick={() => setError(null)}
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
               </div>
               <div className="modal-body">
                 <p>{error}</p>
@@ -316,7 +316,7 @@ const Clientes = () => {
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-primary"
+                  className="btn btn-light"
                   data-dismiss="modal"
                   onClick={() => setError(null)}
                 >

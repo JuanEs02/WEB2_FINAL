@@ -35,13 +35,18 @@ const Tareas = () => {
   const validarCampos = () => {
     setError(null);
 
-    if (titulo.trim() === '' || descripcion.trim() === '') {
-      setError('Los campos de título y/o descripción no pueden estar vacíos.');
+    if (titulo.trim() === '') {
+      setError('Agregue un titulo a la tarea');
       return false;
     }
 
-    if (fechavenc.trim() === '' || !/^\d{4}-\d{2}-\d{2}$/.test(fechavenc)) {
-      setError('La fecha no debe estar vacia y debe tener el formato YYYY-MM-DD.');
+    if (descripcion.trim() === ''){
+      setError('Agregue la descripción de la tarea')
+      return false;
+    }
+
+    if (fechavenc.trim() === '') {
+      setError('Agregue una fecha limite');
       return false;
     }
     return true;
@@ -249,9 +254,8 @@ const Tareas = () => {
               <div class="input-group mb-3">
               <span class="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> event_busy </span>
               <input
-                type="text"
+                type="date"
                 className="form-control mb-2"
-                placeholder="Ingrese fecha limite (YYYY-MM-DD)"
                 value={fechavenc}
                 onChange={(e) => setFechaVenc(e.target.value)}
               />
@@ -290,15 +294,7 @@ const Tareas = () => {
             <div className="modal-content bg-dark">
               <div className="modal-header">
                 <h5 className="modal-title">Error al ingresar datos</h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                  onClick={() => setError(null)}
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
+
               </div>
               <div className="modal-body">
                 <p>{error}</p>
@@ -306,7 +302,7 @@ const Tareas = () => {
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-primary"
+                  className="btn btn-light"
                   data-dismiss="modal"
                   onClick={() => setError(null)}
                 >
