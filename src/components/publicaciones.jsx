@@ -17,6 +17,8 @@ const Publicaciones = () => {
   const [fechacrea, setFechaCrea] = useState('')
   const [autor, setAutor] = useState('')
 
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     const obtenerDatos = async () => {
       try {
@@ -30,6 +32,26 @@ const Publicaciones = () => {
     obtenerDatos();
   }, [])
 
+  const validarCampos = () => {
+    setError(null);
+
+    if (titulo.trim() === '' || contenido.trim() === '') {
+      setError('Los campos de título y/o contenido no pueden estar vacíos.');
+      return false;
+    }
+
+    if (fechacrea.trim() === '' || !/^\d{4}-\d{2}-\d{2}$/.test(fechacrea)) {
+      setError('La fecha no debe estar vacia y debe tener el formato YYYY-MM-DD.');
+      return false;
+    }
+
+    if (autor.trim() === '') {
+      setError('El campo de auto no puede ser vacio')
+      return false;
+    }
+    return true;
+  };
+
   const editar = item => {
     setTitulo(item.titulo)
     setContenido(item.contenido)
@@ -41,6 +63,10 @@ const Publicaciones = () => {
 
   const editarPublicaciones = async e => {
     e.preventDefault();
+
+    if (!validarCampos()) {
+      return;
+    }
 
     try {
       const docRef = doc(db, 'publicaciones', id);
@@ -83,6 +109,10 @@ const Publicaciones = () => {
 
   const guardarPublicaciones = async (e) => {
     e.preventDefault()
+
+    if (!validarCampos()) {
+      return;
+    }
 
     try {
       const data = await addDoc(collection(db, 'publicaciones'), {
@@ -129,7 +159,7 @@ const Publicaciones = () => {
           <Link to="/productos" style={{ animationDelay: "0.3s" }}><strong>Productos</strong></Link>
           <Link to="/clientes" style={{ animationDelay: "0.4s" }}><strong>Clientes</strong></Link>
           <Link to="/tareas" style={{ animationDelay: "0.5s" }}><strong>Tareas</strong></Link>
-          <Link to="/reservas" style={{ animationDelay: "0.7s" }}><strong>Reservas</strong></Link>
+          <Link to="/empleados" style={{ animationDelay: "0.7s" }}><strong>Empleados</strong></Link>
         </nav>
       </div>
 
@@ -160,10 +190,22 @@ const Publicaciones = () => {
           <div className="col-4">
             <h4 className="text-center text-light">{modoEdicion ? 'Editar Publicación' : 'Añadir Publicación'}</h4>
             <form onSubmit={modoEdicion ? editarPublicaciones : guardarPublicaciones}>
-              <input type="text" className="form-control mb-2" placeholder="Ingrese un titulo" value={titulo} onChange={(e) => setTitulo(e.target.value)} />
-              <input type="text" className="form-control mb-2" placeholder="Ingrese el contenido" value={contenido} onChange={(e) => setContenido(e.target.value)} />
-              <input type="text" className="form-control mb-2" placeholder="Ingrese una fecha de creación" value={fechacrea} onChange={(e) => setFechaCrea(e.target.value)} />
-              <input type="text" className="form-control mb-2" placeholder="Ingrese un autor" value={autor} onChange={(e) => setAutor(e.target.value)} />
+              <div class="input-group mb-3">
+                <span class="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> title </span>
+                <input type="text" className="form-control mb-2" placeholder="Ingrese un titulo" value={titulo} onChange={(e) => setTitulo(e.target.value)} />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> article </span>
+                <textarea type="text" className="form-control mb-2" placeholder="Ingrese el contenido" value={contenido} onChange={(e) => setContenido(e.target.value)} />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> calendar_month </span>
+                <input type="text" className="form-control mb-2" placeholder="Ingrese fecha creación (YYYY-MM-DD)" value={fechacrea} onChange={(e) => setFechaCrea(e.target.value)} />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text mb-2 material-symbols-outlined" id="basic-addon1"> person </span>
+                <input type="text" className="form-control mb-2" placeholder="Ingrese un autor" value={autor} onChange={(e) => setAutor(e.target.value)} />
+              </div>
               <div className="d-grid gap-2">
                 {
                   modoEdicion ? (
@@ -179,6 +221,44 @@ const Publicaciones = () => {
           </div>
         </div>
       </div>
+
+      {error && (
+        <div
+          className="modal fade show"
+          style={{ display: 'block' }}
+          tabIndex="-1"
+          role="dialog">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content bg-dark">
+              <div className="modal-header">
+                <h5 className="modal-title">Error al ingresar datos</h5>
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                  onClick={() => setError(null)}
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <p>{error}</p>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  data-dismiss="modal"
+                  onClick={() => setError(null)}
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
